@@ -1,0 +1,188 @@
+/* ============================================================
+   QUIET MASTERY — Hieu Vu Design System
+   colors_and_type.css
+   ============================================================ */
+
+/* ── FONTS ── */
+@font-face {
+  font-family: "David Libre";
+  src: url("./fonts/DavidLibre-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "David Libre";
+  src: url("./fonts/DavidLibre-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Inter Tight";
+  src: url("./fonts/InterTight-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+}
+/* Crimson Pro — served via Google Fonts (not included as file) */
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&display=swap");
+
+/* ── BASE COLOR TOKENS ── */
+:root {
+  /* Primary Palette (from Figma Palette component) */
+  --color-cream:        #E9E9DB;   /* warm cream/sand — primary background */
+  --color-amber:        #915E17;   /* warm amber/gold */
+  --color-sage:         #575E40;   /* deep sage/forest green */
+  --color-steel:        #406075;   /* dusty steel blue */
+  --color-ivory:        #F4F1EC;   /* pale ivory — lightest bg */
+  --color-terracotta:   #C7663D;   /* terracotta/clay — warm accent */
+  --color-sage-light:   #BACF95;   /* soft sage green */
+  --color-navy:         #1A233B;   /* deep navy */
+
+  /* Extended Tones (from frames) */
+  --color-mahogany-dark:  #431309; /* darkest mahogany fill */
+  --color-mahogany:       #571A10; /* deep mahogany */
+  --color-terra-mid:      #AC4630; /* mid terracotta */
+  --color-cream-warm:     #FFF8E7; /* warm cream stroke */
+  --color-cream-bright:   #FFFBF1; /* near-white cream */
+  --color-sage-pale:      #EAF5DF; /* very pale sage */
+  --color-sage-mist:      #F2F6ED; /* misty sage — text on dark */
+  --color-gold-text:      #A36916; /* golden amber for text */
+  --color-shadow:    rgba(36,9,9,0.25); /* warm shadow */
+
+  /* ── SEMANTIC TOKENS ── */
+  --bg-primary:    var(--color-cream);
+  --bg-secondary:  var(--color-ivory);
+  --bg-dark:       var(--color-mahogany);
+  --bg-sage:       var(--color-sage);
+  --bg-steel:      var(--color-steel);
+
+  --fg-primary:    var(--color-sage);        /* default body text on light bg */
+  --fg-display:    var(--color-mahogany);    /* large display text on light bg */
+  --fg-on-dark:    var(--color-cream);       /* text on dark/photo backgrounds */
+  --fg-on-sage:    var(--color-sage-mist);   /* text on sage green */
+  --fg-accent:     var(--color-terracotta);  /* highlight / link color */
+  --fg-muted:      var(--color-amber);       /* secondary / muted text */
+
+  /* ── TYPOGRAPHY ── */
+  --font-display:   "David Libre", Georgia, serif;
+  --font-editorial: "Crimson Pro", Georgia, serif;
+  --font-sans:      "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+
+  /* Type Scale */
+  --text-xs:   0.75rem;    /* 12px — captions */
+  --text-sm:   0.875rem;   /* 14px — small labels */
+  --text-base: 1rem;       /* 16px — body */
+  --text-lg:   1.25rem;    /* 20px — large body */
+  --text-xl:   1.5rem;     /* 24px — small headlines */
+  --text-2xl:  2rem;       /* 32px — subheadings */
+  --text-3xl:  3rem;       /* 48px — section headings */
+  --text-4xl:  4rem;       /* 64px — large headings */
+  --text-5xl:  6rem;       /* 96px — display */
+  --text-6xl:  9.375rem;   /* 150px — hero display */
+
+  /* Letter spacing */
+  --tracking-tight:  -0.03em;
+  --tracking-normal: -0.01em;
+  --tracking-wide:   0.08em;   /* for small-caps / eyebrow labels */
+
+  /* Line heights */
+  --leading-tight:   0.9;
+  --leading-display: 1.0;
+  --leading-snug:    1.1;
+  --leading-body:    1.5;
+
+  /* ── SPACING ── */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-32: 128px;
+
+  /* ── BORDERS & RADIUS ── */
+  --radius-none:   0;
+  --radius-sm:     2px;
+  --radius-md:     4px;
+  --radius-pill:   9999px;
+
+  /* ── SHADOWS ── */
+  --shadow-warm: 0px 20px 25px 0px rgba(36,9,9,0.25);
+  --shadow-subtle: 0px 4px 16px 0px rgba(36,9,9,0.10);
+}
+
+/* ── SEMANTIC ELEMENT STYLES ── */
+h1, .h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-5xl);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-display);
+}
+
+h2, .h2 {
+  font-family: var(--font-editorial);
+  font-weight: 300;
+  font-size: var(--text-4xl);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-primary);
+}
+
+h3, .h3 {
+  font-family: var(--font-editorial);
+  font-weight: 300;
+  font-size: var(--text-3xl);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-normal);
+  color: var(--fg-primary);
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+p, .body {
+  font-family: var(--font-editorial);
+  font-weight: 300;
+  font-size: var(--text-lg);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-normal);
+  color: var(--fg-primary);
+}
+
+.caption {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-normal);
+  color: var(--fg-muted);
+}
+
+blockquote, .pull-quote {
+  font-family: var(--font-editorial);
+  font-weight: 300;
+  font-style: italic;
+  font-size: var(--text-2xl);
+  line-height: 1.3;
+  letter-spacing: var(--tracking-normal);
+  color: var(--fg-primary);
+}
+
+.display-hero {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-6xl);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}

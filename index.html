@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AITduhoc — Project Showcase</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--color-cream);
+    color: var(--color-sage);
+    font-family: var(--font-editorial);
+    overflow-x: hidden;
+  }
+
+  /* ── UTILITIES ── */
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-amber);
+  }
+
+  .rule { border: none; border-top: 1px solid rgba(87,94,64,0.2); }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(233,233,219,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(87,94,64,0.12);
+  }
+  .topbar-mark { width: 28px; opacity: 0.8; }
+  .topbar-nav {
+    display: flex; gap: 32px;
+    font-family: var(--font-sans); font-size: 0.72rem;
+    font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--color-sage);
+  }
+  .topbar-nav a { text-decoration: none; color: inherit; opacity: 0.6; transition: opacity 0.3s; }
+  .topbar-nav a:hover { opacity: 1; }
+  .topbar-label {
+    font-family: var(--font-sans); font-size: 0.7rem;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--color-sage); opacity: 0.9; font-weight: 600;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 120px 0 80px;
+    background: var(--color-cream);
+    display: grid;
+    grid-template-columns: 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-inner {
+    max-width: 1200px; margin: 0 auto;
+    padding: 0 48px;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 56px;
+    align-items: start;
+  }
+  .hero-left { display: flex; flex-direction: column; gap: 32px; }
+  .hero-chapter {
+    display: flex; align-items: center; gap: 16px;
+  }
+  .hero-chapter-line {
+    width: 40px; height: 1px; background: var(--color-amber);
+  }
+  .hero-headline {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(38px, 5vw, 68px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--color-mahogany);
+    text-wrap: pretty;
+  }
+  .hero-headline em {
+    font-style: italic;
+    font-family: var(--font-editorial);
+    font-weight: 300;
+    font-size: 1.15em;
+    line-height: 1;
+    color: var(--color-terracotta);
+    letter-spacing: -0.01em;
+  }
+  .hero-deck {
+    font-family: var(--font-editorial);
+    font-weight: 300;
+    font-size: 1.25rem;
+    line-height: 1.25;
+    color: var(--color-sage);
+    max-width: 520px;
+    border-left: 2px solid var(--color-terracotta);
+    padding-left: 20px;
+  }
+  .hero-meta {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 24px; padding-top: 24px;
+    border-top: 1px solid rgba(87,94,64,0.15);
+  }
+  .hero-meta-item { display: flex; flex-direction: column; gap: 6px; }
+  .hero-meta-label {
+    font-family: var(--font-sans); font-size: 0.65rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--color-amber);
+  }
+  .hero-meta-value {
+    font-family: var(--font-sans); font-size: 0.85rem;
+    font-weight: 500; color: var(--color-sage);
+  }
+
+  /* Hero right — image card */
+  .hero-image-card {
+    position: relative;
+    aspect-ratio: 3/4;
+    background: var(--color-sage);
+    overflow: hidden;
+  }
+  .hero-image-card img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    filter: sepia(0.15) contrast(1.05);
+  }
+  .image-placeholder {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 12px; padding: 32px;
+    background: var(--color-sage);
+    text-align: center;
+  }
+  .image-placeholder-icon {
+    width: 48px; height: 48px; opacity: 0.3;
+  }
+  .image-placeholder p {
+    font-family: var(--font-sans); font-size: 0.7rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--color-cream); opacity: 0.5; line-height: 1.6;
+  }
+  .hero-image-caption {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 16px 20px;
+    background: linear-gradient(transparent, rgba(27,35,59,0.7));
+    font-family: var(--font-sans); font-size: 0.65rem;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: rgba(233,233,219,0.7);
+  }
+
+  /* ── SECTION ANATOMY ── */
+  section { position: relative; }
+
+  .section-cream { background: var(--color-cream); }
+  .section-ivory { background: var(--color-ivory); }
+  .section-sage { background: var(--color-sage); }
+  .section-dark { background: var(--color-mahogany); }
+  .section-steel { background: var(--color-steel); }
+
+  /* chapter-marker removed */
+
+  /* ── STANDARD COLUMNS ── */
+  .col-wrap {
+    max-width: 1200px; margin: 0 auto; padding: 0 48px;
+  }
+  .col-wrap.padded { padding-top: 96px; padding-bottom: 96px; }
+  .col-wrap.padded-lg { padding-top: 128px; padding-bottom: 128px; }
+
+  .two-col {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+    align-items: start;
+  }
+  .three-col {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 28px;
+  }
+  .sidebar-col {
+    display: grid; grid-template-columns: 340px 1fr; gap: 56px;
+    align-items: start;
+  }
+  .sidebar-col.reverse {
+    grid-template-columns: 1fr 340px;
+  }
+
+  /* ── SECTION TITLE ANATOMY ── */
+  .section-header { display: flex; flex-direction: column; gap: 10px; margin-bottom: 36px; max-width: 100%; }
+  .section-number {
+    font-family: var(--font-sans); font-size: 0.65rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--color-amber);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-number::after { content:''; flex:1; height:1px; background:var(--color-amber); opacity:0.4; max-width: 40px; }
+  .section-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--color-mahogany);
+    max-width: 100%;
+  }
+  .section-header { max-width: 100%; }
+  .section-title.on-dark { color: var(--color-cream); }
+  .section-title.on-sage { color: var(--color-sage-light); }
+  .section-subtitle {
+    font-family: var(--font-editorial); font-weight: 300; font-style: italic;
+    font-size: 1.1rem; line-height: 1.2;
+    color: var(--color-sage); opacity: 0.8;
+    max-width: 480px;
+  }
+  .section-subtitle.on-dark { color: var(--color-cream); opacity: 0.6; }
+
+  /* ── BODY COPY ── */
+  .prose { display: flex; flex-direction: column; gap: 12px; }
+  .prose p {
+    font-family: var(--font-editorial); font-weight: 300;
+    font-size: 1.05rem; line-height: 1.2;
+    color: var(--color-sage);
+    text-wrap: pretty;
+  }
+  .prose p.on-dark { color: rgba(233,233,219,0.75); }
+  .prose p strong { font-weight: 400; color: inherit; }
+  .prose p.on-dark strong { color: var(--color-cream); }
+
+  /* ── PULL QUOTE ── */
+  .pull-quote {
+    border-left: 3px solid var(--color-terracotta);
+    padding: 10px 0 10px 20px;
+    margin: 20px 0;
+  }
+  .pull-quote blockquote {
+    font-family: var(--font-editorial); font-weight: 300; font-style: italic;
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    color: var(--color-sage);
+    text-wrap: pretty;
+  }
+  .pull-quote blockquote.on-dark { color: var(--color-cream); }
+  .pull-quote cite {
+    display: block; margin-top: 12px;
+    font-family: var(--font-sans); font-size: 0.68rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--color-amber); font-style: normal;
+  }
+
+  /* wide pull quote — full width interrupt */
+  .interrupt-quote {
+    padding: 52px 0;
+    border-top: 1px solid rgba(87,94,64,0.15);
+    border-bottom: 1px solid rgba(87,94,64,0.15);
+    max-width: 760px; margin: 0 auto;
+    text-align: center;
+  }
+  .interrupt-quote blockquote {
+    font-family: var(--font-editorial); font-weight: 300; font-style: italic;
+    font-size: clamp(1.5rem, 3vw, 2.4rem);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: var(--color-mahogany);
+    text-wrap: pretty;
+  }
+  .interrupt-quote.on-sage blockquote { color: var(--color-cream); }
+
+  /* ── IMAGE PLACEHOLDERS ── */
+  .img-block {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-sage);
+  }
+  .img-block img { width:100%; height:100%; object-fit: cover; display:block; }
+  .img-block .img-caption { display: none; }
+  .img-block-inner {
+    width:100%; min-height: 320px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 12px; padding: 40px 32px; text-align: center;
+  }
+  .img-block-inner.tall { min-height: 480px; }
+  .img-block-inner.short { min-height: 220px; }
+  .img-block-inner.dark-bg { background: var(--color-navy); }
+  .img-block-inner.sage-bg { background: var(--color-sage); }
+  .img-block-inner.steel-bg { background: var(--color-steel); }
+  .img-block-inner.cream-bg { background: var(--color-ivory); border: 1px solid rgba(87,94,64,0.15); }
+  .img-block-inner svg.placeholder-icon { width:40px; height:40px; opacity:0.25; }
+  .img-block-inner .ph-label {
+    font-family: var(--font-sans); font-size: 0.63rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--color-cream); opacity: 0.4; line-height: 1.7; max-width: 220px;
+  }
+  .img-block-inner .ph-label.dark-text { color: var(--color-sage); opacity: 0.45; }
+
+  /* ── MARKET MAP DIAGRAM ── */
+  .market-map {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+    margin: 28px 0;
+  }
+  .map-cell {
+    padding: 24px 24px;
+    display: flex; flex-direction: column; gap: 8px;
+    position: relative;
+  }
+  .map-cell.active { background: var(--color-mahogany); }
+  .map-cell.inactive { background: #ffffff; }
+  .map-cell.gap { background: var(--color-terracotta); }
+  .map-cell .cell-label {
+    font-family: var(--font-sans); font-size: 0.65rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    opacity: 0.6;
+  }
+  .map-cell.active .cell-label { color: var(--color-cream); }
+  .map-cell.inactive .cell-label { color: var(--color-sage); opacity: 1; font-weight: 700; }
+  .map-cell.gap .cell-label { color: rgba(233,233,219,0.5); }
+  .map-cell .cell-title {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: 1.6rem; letter-spacing: -0.02em; line-height: 1.05;
+  }
+  .map-cell.active .cell-title { color: var(--color-cream); }
+  .map-cell.inactive .cell-title { color: var(--color-sage); opacity: 1; }
+  .map-cell.gap .cell-title { color: var(--color-cream); font-size: 2rem; }
+  .map-cell .cell-desc {
+    font-family: var(--font-editorial); font-weight: 300;
+    font-size: 0.95rem; line-height: 1.15;
+  }
+  .map-cell.active .cell-desc { color: rgba(233,233,219,0.65); }
+  .map-cell.inactive .cell-desc { color: var(--color-sage); opacity: 0.9; }
+  .map-cell.gap .cell-desc { color: rgba(233,233,219,0.6); }
+  .map-cell .cell-badge {
+    display: inline-flex; align-items: center;
+    font-family: var(--font-sans); font-size: 0.6rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 4px 10px; margin-top: 4px;
+    border: 1px solid;
+  }
+  .map-cell.active .cell-badge { border-color: rgba(233,233,219,0.25); color: rgba(233,233,219,0.5); }
+  .map-cell.gap .cell-badge { 
+    border-color: rgba(233,233,219,0.6); 
+    color: var(--color-ivory); 
+    background: rgba(233,233,219,0.15);
+    padding: 6px 14px;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    font-weight: 600;
+  }
+  .map-cell.inactive .cell-badge { border-color: rgba(87,94,64,0.5); color: var(--color-sage); font-weight: 600; }
+
+  /* ── BEFORE/AFTER SHIFT ── */
+  .shift-table {
+    width: 100%; border-collapse: collapse; margin: 40px 0;
+  }
+  .shift-table thead tr {
+    border-bottom: 1px solid rgba(87,94,64,0.2);
+  }
+  .shift-table th {
+    font-family: var(--font-sans); font-size: 0.65rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--color-amber); padding: 0 0 14px;
+    text-align: left; font-weight: 600;
+  }
+  .shift-table th:last-child { color: rgba(233,233,219,0.6); }
+  .shift-table tbody tr {
+    border-bottom: 1px solid rgba(233,233,219,0.08);
+  }
+  .shift-table td {
+    padding: 18px 0;
+    font-family: var(--font-editorial); font-weight: 300;
+    font-size: 1rem; line-height: 1.1;
+    color: rgba(233,233,219,0.55); vertical-align: top;
+  }
+  .shift-table td:first-child {
+    padding-right: 32px;
+    color: rgba(233,233,219,0.28);
+  }
+  .shift-table td:nth-child(2) {
+    padding-right: 32px; width: 40px;
+    font-family: var(--font-sans); font-size: 0.75rem;
+    color: rgba(233,233,219,0.4);
+    text-align: center; text-decoration: none;
+  }
+  .shift-table td:last-child { font-weight: 400; color: var(--color-cream); }
+
+  /* ── CRAFT LIST ── */
+  .craft-list { display: flex; flex-direction: column; }
+  .craft-item {
+    display: grid; grid-template-columns: 32px 1fr;
+    gap: 16px; padding: 18px 0;
+    border-bottom: 1px solid rgba(233,233,219,0.12);
+    align-items: start;
+  }
+  .craft-item:first-child { border-top: 1px solid rgba(233,233,219,0.12); }
+  .craft-num {
+    font-family: var(--font-sans); font-size: 0.65rem;
+    letter-spacing: 0.1em; color: rgba(255,248,231,0.3);
+    padding-top: 4px;
+  }
+  .craft-content { display: flex; flex-direction: column; gap: 6px; }
+  .craft-title {
+    font-family: var(--font-sans); font-size: 0.95rem;
+    font-weight: 600; letter-spacing: 0.04em;
+    color: #FFF8E7;
+  }
+  .craft-desc {
+    font-family: var(--font-editorial); font-weight: 300;
+    font-size: 0.95rem; line-height: 1.2;
+    color: rgba(255,248,231,0.55);
+  }
+
+  /* ── RESULTS STRIP ── */
+  .result-strip {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    border-top: 1px solid rgba(87,94,64,0.15);
+    border-bottom: 1px solid rgba(87,94,64,0.15);
+    margin: 28px 0;
+  }
+  .result-item {
+    padding: 22px 0;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .result-item + .result-item {
+    border-left: 1px solid rgba(87,94,64,0.12);
+    padding-left: 32px;
+  }
+  .result-big {
+    font-family: var(--font-display); font-size: 1.8rem;
+    line-height: 1; letter-spacing: -0.03em;
+    color: var(--color-sage);
+  }
+  .result-label {
+    font-family: var(--font-sans); font-size: 0.7rem;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--color-sage);
+  }
+  .result-note {
+    font-family: var(--font-editorial); font-weight: 300; font-style: italic;
+    font-size: 0.9rem; color: var(--color-sage); opacity: 0.7;
+    max-width: 220px; line-height: 1.2;
+  }
+
+  /* ── DEPTH CYCLE (closing section) ── */
+  .depth-cycle {
+    display: flex; flex-direction: column; gap: 0;
+    border: 1px solid rgba(233,233,219,0.12);
+    margin-top: 32px;
+  }
+  .cycle-step {
+    display: grid; grid-template-columns: 80px 1fr;
+    border-bottom: 1px solid rgba(233,233,219,0.08);
+    padding: 18px 24px;
+  }
+  .cycle-step:last-child { border-bottom: none; }
+  .cycle-n {
+    font-family: var(--font-display); font-size: 2rem;
+    font-weight: 400; letter-spacing: -0.03em;
+    color: var(--color-cream); opacity: 0.28;
+    line-height: 1;
+  }
+  .cycle-text {
+    font-family: var(--font-editorial); font-weight: 300;
+    font-size: 1rem; line-height: 1.2;
+    color: rgba(233,233,219,0.65);
+  }
+  .cycle-text strong { font-weight: 400; color: var(--color-cream); }
+
+  /* ── FOOTER CTA ── */
+  .footer-cta {
+    padding: 96px 48px;
+    text-align: center;
+    background: var(--color-ivory);
+    display: flex; flex-direction: column; align-items: center; gap: 32px;
+  }
+  .footer-cta p {
+    font-family: var(--font-editorial); font-weight: 300; font-style: italic;
+    font-size: 1rem; line-height: 1.45;
+    color: var(--color-sage); max-width: 520px;
+  }
+  .cta-link {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-family: var(--font-sans); font-size: 0.72rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--color-mahogany); text-decoration: none;
+    border-bottom: 1px solid var(--color-terracotta);
+    padding-bottom: 4px;
+    transition: opacity 0.3s;
+  }
+  .cta-link:hover { opacity: 0.7; }
+  .footer-sig {
+    font-family: var(--font-sans); font-size: 0.55rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--color-amber); opacity: 0.6;
+  }
+
+  /* ── CTA BUTTON ── */
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--font-sans); font-size: 0.72rem;
+    font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none;
+    padding: 14px 24px;
+    border: 1px solid var(--color-sage);
+    color: var(--color-sage);
+    background: transparent;
+    transition: background 0.2s, color 0.2s;
+    cursor: pointer;
+  }
+  .cta-btn:hover { background: var(--color-sage); color: var(--color-cream); }
+  .cta-btn.on-dark { border-color: rgba(233,233,219,0.35); color: var(--color-cream); }
+  .cta-btn.on-dark:hover { background: rgba(233,233,219,0.12); }
+  .cta-btn.on-ivory { border-color: var(--color-mahogany); color: var(--color-mahogany); }
+  .cta-btn.on-ivory:hover { background: var(--color-mahogany); color: var(--color-cream); }
+  .fade-in {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* Placeholder SVG icon */
+  .ph-icon { opacity: 0.2; }
+
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<nav class="topbar">
+  <svg class="topbar-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60.656 60.524" fill="none"><path d="M 1.088 60.25 C -0.271 59.769 0.193 54.521 0.232 53.458 C 0.396 49.029 1.194 30.697 1.199 30.659 C 1.963 18.415 -0.977 14.718 0.348 2.838 C 0.377 2.595 1.354 0.446 2.021 0.437 L 23.521 0 C 24.372 -0.019 24.618 2.576 24.019 2.76 C 20.064 3.988 12.314 7.097 10.999 9.799 C 7.929 16.105 6.295 28.446 6.304 31.386 C 6.304 32.483 8.233 39.924 8.92 40.569 C 9.761 41.36 17.115 48.02 18.604 48.607 C 20.243 49.248 40.64 47.967 43.261 45.697 C 45.727 43.562 49.918 30.79 49.855 29.426 C 49.768 27.559 48.144 19.593 47.467 17.847 C 46.834 16.212 32.33 11.914 31.174 12.225 C 30.434 12.424 25.996 17.493 24.826 18.531 C 24.304 18.992 21.592 24.391 21.021 26.293 C 20.934 26.584 20.755 32.027 25.372 34.054 C 25.682 34.19 35.018 34.539 35.525 33.084 C 36.391 30.595 32.571 25.23 32.141 25.322 C 29.699 25.851 27.306 26.293 26.16 25.754 C 25.015 25.216 34.723 17.469 36.173 17.333 C 36.942 17.26 43.991 21.126 44.503 21.674 C 45.886 23.139 44.943 30.862 44.407 34.273 C 44.344 34.67 44.112 35.034 43.744 35.243 C 41.844 36.349 34.529 42.611 33.108 42.781 C 29.129 43.266 25.372 40.356 22.955 39.871 C 21.195 39.516 15.176 37.547 14.731 36.446 C 11.874 29.383 12.386 18.546 13.184 15.897 C 14.731 10.765 33.669 3.381 38.315 2.542 C 43.599 1.586 51.988 8.038 58.244 9.464 C 58.882 9.61 59.351 10.114 59.385 10.735 L 60.656 32.977 C 60.656 33.04 60.656 33.103 60.656 33.166 C 60.492 35.233 59.636 39.381 59.128 47.627 C 58.906 51.183 60.052 56.243 58.244 59.44 C 57.968 59.925 45.775 59.837 38.136 60.24 C 31.3 60.599 21.461 59.182 17.656 59.27 C 12.324 59.391 3.829 61.21 1.088 60.24 L 1.088 60.25 Z" fill="#1e1c18"/></svg>
+  <div class="topbar-nav">
+    <a href="#diagnosis">Diagnosis</a>
+    <a href="#insight">Insight</a>
+    <a href="#strategy">Strategy</a>
+    <a href="#design">Design</a>
+    <a href="#results">Results</a>
+  </div>
+  <div class="topbar-label">Case Study · AITduhoc</div>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════════ -->
+<section class="hero section-cream">
+  <div class="hero-inner">
+    <div class="hero-left fade-in">
+      <div class="hero-chapter">
+        <div class="hero-chapter-line"></div>
+        <span class="eyebrow">Case Study · Education & Career Counselling</span>
+      </div>
+      <h1 class="hero-headline">
+        Translate<br>
+        <em>Quiet Expertise</em><br>
+        into Sustainable<br>
+        Differentiated Value
+      </h1>
+      <p class="hero-deck">
+        Mrs. Quynh Vu's consultancy was too good at what it did — 
+        and completely invisible for it. This is how her lived experience 
+        became the one positioning no competitor could replicate.
+      </p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Client</span>
+          <span class="hero-meta-value">AITduhoc</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Industry</span>
+          <span class="hero-meta-value">Education Counselling</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Services</span>
+          <span class="hero-meta-value">Strategy · Web · Content</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-image-card fade-in" style="animation-delay:0.2s; margin-top:64px;">
+      <img src="uploads/678471ba8474fdc985d44fed_RMS-290.jpeg" alt="Mrs. Quynh Vu at University of Manitoba event" style="width:100%;height:100%;object-fit:cover;display:block;">
+      <div class="hero-image-caption">Mrs. Quynh Vu, Founder — AITduhoc</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     01 — DIAGNOSIS
+     ═══════════════════════════════════════════ -->
+<section id="diagnosis" class="section-ivory" style="padding: 64px 0;">
+  <div class="col-wrap">
+
+    <div class="section-header fade-in">
+      <div class="section-number">01 · Diagnosis</div>
+      <h2 class="section-title">The expertise was real.<br>The visibility wasn't.</h2>
+    </div>
+
+    <div class="sidebar-col fade-in">
+      <div>
+        <div class="img-block">
+          <img src="uploads/students happy in international environment.jpeg" alt="Students happy in an international environment" style="width:100%;height:100%;object-fit:cover;display:block;min-height:480px;">
+        </div>
+      </div>
+      <div>
+        <div class="prose">
+          <p>Mrs. Quynh runs AITduhoc in Vietnam, helping families plan their children's futures in Canada. She isn't like her competitors. She has <strong>actually lived the journey</strong> — international student to Canadian citizen, worker to entrepreneur, mother raising her children in a country she once arrived in as a stranger.</p>
+          <p>Every stage of the path her clients are about to walk, she had already walked herself.</p>
+        </div>
+
+        <div class="pull-quote" style="margin-top:40px;">
+          <blockquote>"But online, none of that came through. Her website looked like every other education consultancy in Vietnam. Service lists. Credentials. Generic promises."</blockquote>
+        </div>
+
+        <div class="prose" style="margin-top:32px;">
+          <p>The kind of presence that forces prospects to <strong>compare you on price</strong>, because you haven't given them any other dimension to compare.</p>
+          <p>She was invisible not because she lacked expertise, but because her expertise was invisible.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     02 — MARKET INSIGHT
+     ═══════════════════════════════════════════ -->
+<section id="insight" class="section-cream" style="padding: 64px 0;">
+  <div class="col-wrap">
+
+    <div class="section-header fade-in">
+      <div class="section-number">02 · Market Insight</div>
+      <h2 class="section-title" style="color:var(--color-sage);">The market was broken<br>in a way no one was naming.</h2>
+      <p class="section-subtitle" style="color:var(--color-sage);">When I researched Vietnam's education consulting landscape, I found something that explained why Mrs. Quynh was struggling despite being exceptional.</p>
+    </div>
+
+    <!-- Market map diagram -->
+    <div class="market-map fade-in">
+      <div class="map-cell inactive">
+        <span class="cell-label">Camp 01 · Study-Abroad Agencies</span>
+        <div class="cell-title">Get accepted.<br>Get a visa.</div>
+        <p class="cell-desc">Success ends at the airport departure gate. The journey beyond is someone else's problem.</p>
+        <span class="cell-badge">Stops at departure</span>
+      </div>
+      <div class="map-cell inactive">
+        <span class="cell-label">Camp 02 · Immigration Agencies</span>
+        <div class="cell-title">Earn points.<br>Get residency.</div>
+        <p class="cell-desc">Students become point-scoring systems. Human beings building lives are lost in translation.</p>
+        <span class="cell-badge">Misses the person</span>
+      </div>
+      <div class="map-cell gap" style="grid-column: 1 / -1;">
+        <span class="cell-label" style="color:rgb(255,255,255);">The Gap · Where AITduhoc lives</span>
+        <div class="cell-title">The whole journey. From first school visit to building a Canadian life.</div>
+        <p class="cell-desc">Parents don't ask about acceptance rates or visa timelines. They ask: "Will my child be happy there? Can they build a career? What happens after graduation?" The market offered tactics. Families needed someone who understood the complete arc.</p>
+        <span class="cell-badge">AITduhoc's territory</span>
+      </div>
+    </div>
+
+    <div class="interrupt-quote fade-in" style="padding:24px 0;">
+      <blockquote>"Mrs. Quynh was that person. She just hadn't found the language to say it."</blockquote>
+    </div>
+    <div class="fade-in" style="text-align:center; padding-bottom:16px; padding-top:32px;">
+      <a href="https://cal.com/hieuvu.ca/30min" class="cta-btn" target="_blank">Find what's broken in your funnel →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     03 — STRATEGIC SHIFT
+     ═══════════════════════════════════════════ -->
+<section id="strategy" class="section-dark" style="padding: 64px 0;">
+  <div class="col-wrap">
+
+    <div class="section-header fade-in">
+      <div class="section-number" style="color:rgba(233,233,219,0.4)">03 · Strategic Shift</div>
+      <h2 class="section-title on-dark">The thing she couldn't<br>see from inside.</h2>
+      <p class="section-subtitle on-dark">When you've lived an experience so deeply,<br>it becomes invisible to you. You forget that it's rare.</p>
+    </div>
+
+    <div class="two-col fade-in">
+      <div>
+        <div class="prose">
+          <p class="on-dark">Mrs. Quynh thought her competitors understood what she understood. They didn't. Most of them had never left Vietnam. They sold a destination they had never inhabited.</p>
+          <p class="on-dark">She wasn't competing with other consultancies. She was being pulled into a competitive herd because she lacked <strong>her own direction</strong>. Her lived experience — student to citizen to mother to entrepreneur — wasn't just a personal story.</p>
+          <p class="on-dark">It was a positioning that no competitor could replicate.</p>
+        </div>
+
+        <div class="pull-quote" style="margin-top:40px; border-color: rgba(233,233,219,0.25);">
+          <blockquote class="on-dark">"Stop positioning AITduhoc as another education consultancy. Start positioning it as what it actually is."</blockquote>
+          <cite>The strategic reframe</cite>
+        </div>
+      </div>
+
+      <div>
+        <!-- Messaging shift table -->
+        <p class="eyebrow" style="margin-bottom:20px; color:rgba(233,233,219,0.45);">The Messaging Shift</p>
+        <table class="shift-table">
+          <thead>
+            <tr>
+              <th>Before</th>
+              <th></th>
+              <th>After</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Visa processing & school selection</td>
+              <td>→</td>
+              <td>Guidance from someone who walked the complete path</td>
+            </tr>
+            <tr>
+              <td>Acceptance rates & timelines</td>
+              <td>→</td>
+              <td>Will my child be happy? Can they build a career?</td>
+            </tr>
+            <tr>
+              <td>Another education consultancy</td>
+              <td>→</td>
+              <td>Vietnam's first holistic education-to-life partner</td>
+            </tr>
+            <tr>
+              <td>Credentials & service lists</td>
+              <td>→</td>
+              <td>A mentor's biography as a foundation of trust</td>
+            </tr>
+            <tr>
+              <td>Compare on price</td>
+              <td>→</td>
+              <td>Recognized before the first conversation begins</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="margin-top:32px;">
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- Strategy brainstorm: full width with landscape padding -->
+  <div style="margin-top:32px; padding: 0 48px 64px;">
+    <img src="uploads/strategy-brainstorm.png" alt="Strategy brainstorming session" style="width:100%;display:block;">
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════
+     04 — DESIGN DIRECTION
+     ═══════════════════════════════════════════ -->
+<section id="design" class="section-ivory" style="padding: 64px 0;">
+  <div class="col-wrap">
+
+    <div class="section-header fade-in">
+      <div class="section-number">04 · Design Direction</div>
+      <h2 class="section-title">Designing for trust,<br>not transactions.</h2>
+      <p class="section-subtitle">The website had to feel like Mrs. Quynh herself.<br>Confident but never pushy. Warm but never unprofessional.</p>
+    </div>
+
+    <!-- Wireframe: full width -->
+    <div class="img-block fade-in" style="margin-bottom:8px;">
+      <img src="uploads/website wireframe.webp" alt="AITduhoc website wireframe" style="width:100%;display:block;">
+    </div>
+
+    <div class="three-col fade-in" style="margin-top: 56px;">
+      <div>
+        <p class="eyebrow" style="margin-bottom:10px; color:var(--color-sage);">Principle 01</p>
+        <h3 style="font-family:var(--font-sans); font-weight:600; font-size:1.4rem; line-height:1.1; letter-spacing:-0.01em; color:var(--color-sage); margin-bottom:10px;">Questions before answers.</h3>
+        <div class="prose">
+          <p>Instead of overwhelming visitors with service lists, the site is structured around the questions families actually ask. "Will my child be happy there?" comes before "What are your fees?"</p>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow" style="margin-bottom:10px; color:var(--color-sage);">Principle 02</p>
+        <h3 style="font-family:var(--font-sans); font-weight:600; font-size:1.4rem; line-height:1.1; letter-spacing:-0.01em; color:var(--color-sage); margin-bottom:10px;">Journey over transaction.</h3>
+        <div class="prose">
+          <p>The messaging shifted from what AITduhoc does to what families gain. Not services — guidance from someone who can see what's coming around each corner.</p>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow" style="margin-bottom:10px; color:var(--color-sage);">Principle 03</p>
+        <h3 style="font-family:var(--font-sans); font-weight:600; font-size:1.4rem; line-height:1.1; letter-spacing:-0.01em; color:var(--color-sage); margin-bottom:10px;">Biography as trust architecture.</h3>
+        <div class="prose">
+          <p>Mrs. Quynh's personal story became the centerpiece — not buried in a bio page, but as the foundation of trust that runs through every section.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="fade-in" style="margin-top:40px; display:flex; flex-direction:column; gap:8px;">
+      <div class="img-block">
+        <img src="uploads/website design moodboard.png" alt="Website design moodboard" style="width:100%;display:block;">
+      </div>
+      <div class="img-block">
+        <img src="uploads/a capture of the homepage.png" alt="AITduhoc homepage" style="width:100%;display:block;">
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 4 extra pages — expandable grid -->
+  <div class="col-wrap fade-in" style="padding-top:24px; padding-bottom:64px;">
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:8px;">
+      <div class="img-expand-wrap" onclick="this.classList.toggle('expanded')" title="Click to expand" style="cursor:zoom-in; overflow:hidden; position:relative;">
+        <img src="uploads/cau-chuyen-thanh-cong.png" alt="Câu chuyện thành công" style="width:100%;display:block;border:1px solid rgb(166,168,160);transition:transform 0.3s;">
+      </div>
+      <div class="img-expand-wrap" onclick="this.classList.toggle('expanded')" title="Click to expand" style="cursor:zoom-in; overflow:hidden; position:relative;">
+        <img src="uploads/lo-trinh-tu-van-du-hoc.png" alt="Lộ trình tư vấn du học" style="width:100%;display:block;border:1px solid rgb(166,168,160);transition:transform 0.3s;">
+      </div>
+      <div class="img-expand-wrap" onclick="this.classList.toggle('expanded')" title="Click to expand" style="cursor:zoom-in; overflow:hidden; position:relative;">
+        <img src="uploads/cam-nang-du-hoc.png" alt="Cẩm nang du học" style="width:100%;display:block;border:1px solid rgb(166,168,160);transition:transform 0.3s;">
+      </div>
+      <div class="img-expand-wrap" onclick="this.classList.toggle('expanded')" title="Click to expand" style="cursor:zoom-in; overflow:hidden; position:relative;">
+        <img src="uploads/landing-page-dinh-cu.png" alt="Landing page định cư" style="width:100%;display:block;border:1px solid rgb(166,168,160);transition:transform 0.3s;">
+      </div>
+    </div>
+  </div>
+
+  <div class="col-wrap fade-in" style="padding-top:24px; padding-bottom:32px;">
+    <a href="https://cal.com/hieuvu.ca/30min" class="cta-btn" target="_blank">Find the gap between your expertise and your marketing →</a>
+  </div>
+
+  <!-- Lightbox overlay -->
+  <div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:999;cursor:zoom-out;align-items:center;justify-content:center;">
+    <img id="lightbox-img" alt="expanded" style="max-width:90vw;max-height:90vh;object-fit:contain;box-shadow:0 32px 80px rgba(0,0,0,0.5);">
+  </div>
+
+  <style>
+    .img-expand-wrap:hover img { opacity: 0.9; }
+  </style>
+  <script>
+    document.querySelectorAll('.img-expand-wrap').forEach(wrap => {
+      wrap.addEventListener('click', function(e) {
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lightbox-img');
+        lbImg.src = this.querySelector('img').src;
+        lb.style.display = 'flex';
+      });
+    });
+    document.getElementById('lightbox').addEventListener('click', function() {
+      this.style.display = 'none';
+    });
+  </script>
+
+</section>
+
+<!-- ═══════════════════════════════════════════
+     05 — THE CRAFT
+     ═══════════════════════════════════════════ -->
+<section class="section-sage" style="padding: 64px 0;">
+  <div class="col-wrap">
+
+    <div class="sidebar-col reverse fade-in">
+      <div>
+        <div class="section-header">
+          <div class="section-number" style="color:rgba(255,248,231,0.35);">05 · The Craft</div>
+          <h2 class="section-title" style="font-size:clamp(28px,4vw,52px); color:#FFF8E7;">None of this means<br>the craft was loose.</h2>
+        </div>
+        <div class="prose">
+          <p style="font-family:var(--font-editorial); font-weight:300; font-size:1rem; line-height:1.5; color:rgba(255,248,231,0.5);">The strategy only works if the execution is invisible. A visitor should feel guided, not designed at.</p>
+        </div>
+        <div style="margin-top:40px;">
+          <div class="img-block">
+            <img src="uploads/a capture of the homepage.png" alt="AITduhoc homepage" style="width:100%;display:block;">
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="craft-list">
+          <div class="craft-item">
+            <span class="craft-num">01</span>
+            <div class="craft-content">
+              <span class="craft-title">Site structure built for discoverability</span>
+              <p class="craft-desc">Clear architecture so the right families find AITduhoc through search — not just word of mouth. Structured for how families actually look for guidance, not how agencies want to be found.</p>
+            </div>
+          </div>
+          <div class="craft-item">
+            <span class="craft-num">02</span>
+            <div class="craft-content">
+              <span class="craft-title">Content architecture for clarity</span>
+              <p class="craft-desc">Visitors move from confusion to certainty about their Canadian future. The navigation logic mirrors the family's emotional journey — curiosity to confidence.</p>
+            </div>
+          </div>
+          <div class="craft-item">
+            <span class="craft-num">03</span>
+            <div class="craft-content">
+              <span class="craft-title">Clean responsiveness across devices</span>
+              <p class="craft-desc">Trust breaks the moment a site breaks. Every layout decision was tested across breakpoints, because the family discovering AITduhoc might be on a phone in Hanoi at midnight.</p>
+            </div>
+          </div>
+          <div class="craft-item">
+            <span class="craft-num">04</span>
+            <div class="craft-content">
+              <span class="craft-title">Foundation for long-term content growth</span>
+              <p class="craft-desc">Not a launch-day impression — a platform designed to grow with Mrs. Quynh's thinking. Every system is built to scale without rebuilding.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     06 — RESULTS
+     ═══════════════════════════════════════════ -->
+<section id="results" class="section-cream" style="padding: 64px 0;">
+  <div class="col-wrap">
+
+    <div class="section-header fade-in">
+      <div class="section-number">06 · Results</div>
+      <h2 class="section-title" style="color:var(--color-sage);">What changed.</h2>
+      <p class="section-subtitle">Mrs. Quynh can now articulate her value with precision. Not in marketing language — in her own words, grounded in her own experience.</p>
+    </div>
+
+    <div class="result-strip fade-in">
+      <div class="result-item">
+        <div class="result-big">Clear</div>
+        <div class="result-label">Positioning</div>
+        <p class="result-note">No longer compared to agencies that had never left Vietnam</p>
+      </div>
+      <div class="result-item">
+        <div class="result-big">Scale</div>
+        <div class="result-label">Beyond Referrals</div>
+        <p class="result-note">A brand foundation that doesn't depend on word of mouth</p>
+      </div>
+      <div class="result-item">
+        <div class="result-big">Depth</div>
+        <div class="result-label">Long-term Partnership</div>
+        <p class="result-note">Website launch led to an ongoing content production partnership</p>
+      </div>
+    </div>
+    <div class="fade-in" style="margin-bottom:40px;">
+      <a href="https://cal.com/hieuvu.ca/30min" class="cta-btn" target="_blank">Find the gap between your expertise and your marketing →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     07 — REFLECTION
+     ═══════════════════════════════════════════ -->
+<section class="section-dark" style="padding: 64px 0;">
+  <div class="col-wrap">
+
+    <div class="section-header fade-in">
+      <div class="section-number" style="color:rgba(233,233,219,0.4)">07 · Reflection</div>
+      <h2 class="section-title on-dark">The depth cycle.</h2>
+    </div>
+
+    <div class="sidebar-col fade-in">
+      <div>
+        <div class="prose">
+          <p class="on-dark">After the website launched, Mrs. Quynh came back. Not for another website. For a long-term content production partnership.</p>
+          <p class="on-dark">She didn't come back because I build websites. She came back because <strong>the thinking changed how she sees her own business.</strong></p>
+        </div>
+
+        <div class="pull-quote" style="margin-top:40px; border-color:rgba(233,233,219,0.25);">
+          <blockquote class="on-dark">"She found me through a Facebook post. She stayed because of what I helped her see."</blockquote>
+          <cite style="color:rgba(233,233,219,0.45);">— Hieu Vu</cite>
+        </div>
+      </div>
+
+      <div>
+        <div class="depth-cycle">
+          <div class="cycle-step">
+            <span class="cycle-n">01</span>
+            <p class="cycle-text">She read something I wrote about <strong>positioning</strong> in a Facebook group. Not an ad. Not a referral. Through thinking.</p>
+          </div>
+          <div class="cycle-step">
+            <span class="cycle-n">02</span>
+            <p class="cycle-text">A project becomes a <strong>partnership</strong> when the client's understanding of their own value keeps growing.</p>
+          </div>
+          <div class="cycle-step">
+            <span class="cycle-n">03</span>
+            <p class="cycle-text">A partnership becomes <strong>ongoing</strong>. Not because you upsell. Because the work keeps revealing new things to say.</p>
+          </div>
+          <div class="cycle-step">
+            <span class="cycle-n">04</span>
+            <p class="cycle-text">This is what I do. Not websites. Not design. <strong>I show you what you can't see from inside.</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER CTA
+     ═══════════════════════════════════════════ -->
+<footer class="footer-cta">
+  <svg style="width:36px; opacity:0.9;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60.656 60.524" fill="none"><path d="M 1.088 60.25 C -0.271 59.769 0.193 54.521 0.232 53.458 C 0.396 49.029 1.194 30.697 1.199 30.659 C 1.963 18.415 -0.977 14.718 0.348 2.838 C 0.377 2.595 1.354 0.446 2.021 0.437 L 23.521 0 C 24.372 -0.019 24.618 2.576 24.019 2.76 C 20.064 3.988 12.314 7.097 10.999 9.799 C 7.929 16.105 6.295 28.446 6.304 31.386 C 6.304 32.483 8.233 39.924 8.92 40.569 C 9.761 41.36 17.115 48.02 18.604 48.607 C 20.243 49.248 40.64 47.967 43.261 45.697 C 45.727 43.562 49.918 30.79 49.855 29.426 C 49.768 27.559 48.144 19.593 47.467 17.847 C 46.834 16.212 32.33 11.914 31.174 12.225 C 30.434 12.424 25.996 17.493 24.826 18.531 C 24.304 18.992 21.592 24.391 21.021 26.293 C 20.934 26.584 20.755 32.027 25.372 34.054 C 25.682 34.19 35.018 34.539 35.525 33.084 C 36.391 30.595 32.571 25.23 32.141 25.322 C 29.699 25.851 27.306 26.293 26.16 25.754 C 25.015 25.216 34.723 17.469 36.173 17.333 C 36.942 17.26 43.991 21.126 44.503 21.674 C 45.886 23.139 44.943 30.862 44.407 34.273 C 44.344 34.67 44.112 35.034 43.744 35.243 C 41.844 36.349 34.529 42.611 33.108 42.781 C 29.129 43.266 25.372 40.356 22.955 39.871 C 21.195 39.516 15.176 37.547 14.731 36.446 C 11.874 29.383 12.386 18.546 13.184 15.897 C 14.731 10.765 33.669 3.381 38.315 2.542 C 43.599 1.586 51.988 8.038 58.244 9.464 C 58.882 9.61 59.351 10.114 59.385 10.735 L 60.656 32.977 C 60.656 33.04 60.656 33.103 60.656 33.166 C 60.492 35.233 59.636 39.381 59.128 47.627 C 58.906 51.183 60.052 56.243 58.244 59.44 C 57.968 59.925 45.775 59.837 38.136 60.24 C 31.3 60.599 21.461 59.182 17.656 59.27 C 12.324 59.391 3.829 61.21 1.088 60.24 L 1.088 60.25 Z" fill="#1e1c18"/></svg>
+  <div class="section-number" style="margin-bottom:-16px;">A real conversation</div>
+  <h2 style="font-family:var(--font-display); font-weight:400; font-size:clamp(28px,4vw,52px); line-height:1; letter-spacing:-0.03em; color:var(--color-mahogany); text-align:center;">
+    If something in this story<br>felt familiar.
+  </h2>
+  <p>If you know your experience runs deeper than your online presence shows — I'd love to have a conversation. Not a sales pitch. A real conversation about your business, your presence, and where your website might be quietly hiding the very thing that makes you valuable.</p>
+  <a href="https://cal.com/hieuvu.ca/30min" class="cta-btn on-ivory" target="_blank">30 minutes. Your marketing, reviewed honestly. →</a>
+  <p class="footer-sig">Hieu Vu · Marketing Strategy Consultant · hieuvu.ca</p>
+</footer>
+
+<script>
+  // Scroll fade-in observer
+  const faders = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  faders.forEach(el => observer.observe(el));
+
+  // Stagger children in multi-col blocks
+  document.querySelectorAll('.three-col, .two-col').forEach(col => {
+    const children = [...col.children];
+    children.forEach((child, i) => {
+      child.style.transitionDelay = `${i * 0.12}s`;
+      if (!child.classList.contains('fade-in')) {
+        child.classList.add('fade-in');
+        observer.observe(child);
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
